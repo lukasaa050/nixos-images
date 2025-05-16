@@ -73,7 +73,7 @@ in
           "${restore-network}/bin/restore-network /root/network/addrs.json /root/network/routes-v4.json /root/network/routes-v6.json /etc/systemd/network"
         ];
       };
-
+      boot.kernelPackages = pkgs.linuxPackages_testing;
       unitConfig.ConditionPathExists = [
         "/root/network/addrs.json"
         "/root/network/routes-v4.json"

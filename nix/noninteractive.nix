@@ -58,6 +58,7 @@
      security.polkit.enable = lib.mkForce false;
 
      documentation.man.enable = false;
+     boot.kernelPackages = pkgs.linuxPackages_testing;
 
      # no dependency on x11
      services.dbus.implementation = "broker";
