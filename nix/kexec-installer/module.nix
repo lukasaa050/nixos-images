@@ -13,6 +13,8 @@ let
   # does not link with iptables enabled
   iprouteStatic = pkgs.pkgsStatic.iproute2.override { iptables = null; };
 in
+
+
 {
   imports = [
     (modulesPath + "/installer/netboot/netboot-minimal.nix")
@@ -34,6 +36,7 @@ in
 
   config = {
     boot.initrd.compressor = "xz";
+      # boot.kernelPackages = pkgs.linuxPackages_testing;
     # This is a variant of the upstream kexecScript that also allows embedding
     # a ssh key.
     system.build.kexecRun = pkgs.runCommand "kexec-run" { } ''
@@ -73,7 +76,6 @@ in
           "${restore-network}/bin/restore-network /root/network/addrs.json /root/network/routes-v4.json /root/network/routes-v6.json /etc/systemd/network"
         ];
       };
-      boot.kernelPackages = pkgs.linuxPackages_testing;
       unitConfig.ConditionPathExists = [
         "/root/network/addrs.json"
         "/root/network/routes-v4.json"
